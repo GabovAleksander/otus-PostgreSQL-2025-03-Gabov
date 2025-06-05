@@ -27,7 +27,7 @@ insert into color (name) values ('Зеленый');
 Создадим таблицу с продажами
 
 ```sql
-create table sales(id serial primary key, product_id int, color_id int, summa money);
+create table sales(id serial, product_id int, color_id int, summa money);
 ```
 Вставим 1 млн строк данных
 
