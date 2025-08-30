@@ -243,27 +243,59 @@ Nice=-20
  
 [Install]
 WantedBy=multi-user.target
+```
+
 Далее настраиваем автозапуск службы etcd и ее запускаем:
+
+```
 systemctl daemon-reload
 systemctl enable etcd
 systemctl start etcd
+```
+
 И проверяем, что она запустилась:
+
+```
 systemctl status etcd
 ```
+
+<img width="974" height="616" alt="image" src="https://github.com/user-attachments/assets/9aa4b4d6-bb92-42f8-ab11-c7c84f5d40f8" />
+
+Видно что одна нода не запустилась:
+<img width="974" height="616" alt="image" src="https://github.com/user-attachments/assets/c7cc4696-bcfb-43ca-8fff-9cb8f8dcf7f0" />
+
+<img width="974" height="616" alt="image" src="https://github.com/user-attachments/assets/6044ec76-a4ff-4bdf-9bff-7d5694a71819" />
+
+
 
 Если по какой-то причине служба не запускается, можно просмотреть информацию об ошибке при помощи команды
 ```
 journalctl -e
 ```
+<img width="1033" height="653" alt="image" src="https://github.com/user-attachments/assets/e7a2d54f-0b62-4238-ac94-81432cc93007" />
+
+Проверяем конфиги и обнаруживаем ошибку:
+<img width="1048" height="598" alt="image" src="https://github.com/user-attachments/assets/937c531f-5d55-4d3e-9e3f-016ec9bb90bc" />
+
+Запускаем снова и видим, что всё работает
+
+<img width="1033" height="653" alt="image" src="https://github.com/user-attachments/assets/5b87f72a-e761-4869-864a-3b71646d4851" />
+
 
 Для проверки можно посмотреть информацию о нодах кластера (и узнать, кто лидер):
 ```
 ETCDCTL_API=2 etcdctl member list
 ```
+
+<img width="1009" height="201" alt="image" src="https://github.com/user-attachments/assets/8701adfb-90ba-4c59-8c9d-874dddfd4668" />
+
+
 и проверить здоровье нод:
 ```
 etcdctl endpoint health --cluster -w table
 ```
+
+<img width="750" height="206" alt="image" src="https://github.com/user-attachments/assets/0a849491-7f33-4e9b-bb15-b36b89d7274b" />
 
 
 4. Установка Patroni
@@ -826,14 +858,32 @@ Restart=no
 
 [Install]
 WantedBy=multi-user.target
+```
+
 Переводим Patroni в автозапуск, стартуем и проверяем:
+
+```
 systemctl daemon-reload
 systemctl enable patroni
 systemctl start patroni
 systemctl status patroni
+```
 Просмотреть состояние кластера можно командой
+
+```
 patronictl -c /etc/patroni/patroni.yml list
+```
+<img width="1005" height="418" alt="image" src="https://github.com/user-attachments/assets/1f38db21-03ab-43ca-92df-98fc62e7db87" />
+
+<img width="925" height="418" alt="image" src="https://github.com/user-attachments/assets/546c59cd-d8d2-4f7a-8de4-c63f8878214a" />
+
+<img width="917" height="418" alt="image" src="https://github.com/user-attachments/assets/9b1c3eea-2afb-4cc7-a707-15aaca00233b" />
+
+
+
 Для failover:
+
+```
 patronictl -c /etc/patroni/patroni.yml failover
 ```
 
@@ -894,7 +944,11 @@ pkt_buf = 8192
 listen_backlog = 4096
 log_connections = 1
 log_disconnections = 1
+```
+
 Создаем файл userlist.txt со списком пользователей для работы через PGBouncer:
+
+```
 mcedit /etc/pgbouncer/userlist.txt
 ```
 
