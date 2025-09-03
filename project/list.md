@@ -1040,6 +1040,7 @@ sudo systemctl status haproxy
 Для проверки можно подключиться через psql на IP-адрес HAProxy к порту 7432.
 
  
+<img width="1005" height="613" alt="image" src="https://github.com/user-attachments/assets/02263edb-c42e-4a73-a21c-91b87fc75194" />
 
 
  
