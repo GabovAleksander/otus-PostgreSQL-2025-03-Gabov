@@ -1037,6 +1037,9 @@ sudo systemctl restart haproxy
 sudo systemctl status haproxy
 ```
 
+<img width="797" height="418" alt="image" src="https://github.com/user-attachments/assets/a0a5b913-5faf-402d-9953-426d8d265320" />
+
+
 Для проверки можно подключиться через psql на IP-адрес HAProxy к порту 7432.
 
  
